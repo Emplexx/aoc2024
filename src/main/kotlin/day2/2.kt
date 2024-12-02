@@ -25,6 +25,5 @@ fun partTwo(input: Input) = input.count { it.isSafe() || it.bruteForceSafety() }
 
 fun Report.bruteForceSafety(): Boolean =
     foldIndexed(false) { i, acc, _ ->
-        if (acc) return true
-        toMutableList().apply { removeAt(i) }.isSafe()
+        acc || toMutableList().apply { removeAt(i) }.isSafe()
     }
