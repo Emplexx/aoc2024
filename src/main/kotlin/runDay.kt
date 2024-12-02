@@ -16,13 +16,20 @@ fun <T> runDay(
 ) {
 
     val input = parseInput(getInputString(day))
-    val result1 = partOne?.invoke(input)
-    val result2 = partTwo?.invoke(input)
 
     println("-- Day $day --")
-    println("Part one: ${result1 ?: "TODO"}")
-    println("Part two: ${result2 ?: "TODO"}")
 
+    if (partOne == null && partTwo == null) {
+        println("No solution provided, printing parsed input")
+        println(input)
+    }
+    else {
+        val result1 = partOne?.invoke(input)
+        val result2 = partTwo?.invoke(input)
+
+        println("Part one: ${result1 ?: "TODO"}")
+        println("Part two: ${result2 ?: "TODO"}")
+    }
 }
 
 private fun getInputString(day: Int): String {
