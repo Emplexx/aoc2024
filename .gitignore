@@ -42,4 +42,5 @@ bin/
 .DS_Store
 
 ### Other ###
-/src/main/resources/session
+#/src/main/resources/session
+/src/main/resources/
