@@ -8,27 +8,14 @@ import kotlin.io.path.createFile
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
-private fun <T> ((T) -> Int).toLong(): ((T) -> Long) = { this(it).toLong() }
-
-@JvmName("runDayInt")
-fun <T> runDay(
+fun <I, O> runDay(
     day: Int,
-    partOne: ((T) -> Int)? = null,
-    partTwo: ((T) -> Int)? = null,
+    partOne: ((I) -> O)? = null,
+    partTwo: ((I) -> O)? = null,
 
     inputOverride: (() -> String)? = null,
 
-    parseInput: (String) -> T,
-) = runDay(day, partOne?.toLong(), partTwo?.toLong(), inputOverride, parseInput)
-
-fun <T> runDay(
-    day: Int,
-    partOne: ((T) -> Long)? = null,
-    partTwo: ((T) -> Long)? = null,
-
-    inputOverride: (() -> String)? = null,
-
-    parseInput: (String) -> T,
+    parseInput: (String) -> I,
 ) {
 
     val inputStr = inputOverride?.invoke() ?: getInputString(day)
