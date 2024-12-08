@@ -91,7 +91,7 @@ fun getAntinodes2(a1: Location, a2: Location, range: XYRange): List<Location> {
 
     val prev = mutableListOf(a1)
     while (true) {
-        val node = prev.last().minusX(diffX).minusY(diffY)//.also { println("node: $it") }
+        val node = prev.last().minusX(diffX).minusY(diffY)
         if (node in range) prev.add(node) else break
     }
 
