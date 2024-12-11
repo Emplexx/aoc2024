@@ -7,11 +7,12 @@ import java.nio.file.Paths
 import kotlin.io.path.createFile
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
+import kotlin.time.measureTimedValue
 
-fun <I, O> runDay(
+fun <I> runDay(
     day: Int,
-    partOne: ((I) -> O)? = null,
-    partTwo: ((I) -> O)? = null,
+    partOne: ((I) -> Any)? = null,
+    partTwo: ((I) -> Any)? = null,
 
     inputOverride: (() -> String)? = null,
 
@@ -28,11 +29,14 @@ fun <I, O> runDay(
         println(input)
     }
     else {
-        val result1 = partOne?.invoke(input)
-        println("Part one: ${result1 ?: "TODO"}")
-
-        val result2 = partTwo?.invoke(input)
-        println("Part two: ${result2 ?: "TODO"}")
+        partOne?.let { f ->
+            val (result, time) = measureTimedValue { f(input) }
+            println("Part one: $result in $time")
+        }
+        partTwo?.let { f ->
+            val (result, time) = measureTimedValue { f(input) }
+            println("Part two: $result in $time")
+        }
     }
 }
 
